@@ -1,15 +1,19 @@
 import prisma from "@/lib/prisma"
 
 export default async function handler(req,res){
-    const {avatar,daerah,aspirasi} = req.body
-    console.log(req.body)
-    const addData = await prisma.user.create({
-        data: {
-            avatar,
-            daerah,
-            aspirasi
-        }
-    }) 
+    if (req.method === 'POST'){
+        const {daerah,aspirasi,username} = req.body
+        console.log(req.body)
+        const addData = await prisma.user.create({
+            data: {
+                daerah,
+                aspirasi,
+                username,
+                x: Math.floor(Math.random() * 101),
+                y: Math.floor(Math.random() * 101)
+            }
+        }) 
 
-    return res.json(addData)
+        return res.json({status: true, data: addData})
+    }
 }

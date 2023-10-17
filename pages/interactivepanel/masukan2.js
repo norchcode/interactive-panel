@@ -1,27 +1,16 @@
 import React, { useRef, useState } from "react"
 import { Parallax, ParallaxLayer,IParallax } from "@react-spring/parallax"
-import styles from '../styles/btncloud.module.css'
+import styles from '../../styles/btncloud.module.css'
+import element from '../../styles/form.module.css'
+import Image from "next/image"
+import pngJakarta from '../../public/jakarta.png'
+import bgJakarta from '../../public/pngegg.png'
 
 // Little helpers ...
 
-
-const inputig = (e) =>{
-    var el = document.createElement('span');
-  document.body.appendChild(el);
-  var updateElement = function(q) {
-    var offset = Math.floor(Math.random() * 100);
-    var duration = Math.floor(Math.random() * 10);
-    var size = 15 + 10 - duration;
-    el.innerHTML = '<span style="color: gray;right:'+offset+'vw; font-size: '+size+'px; animation-duration:'+duration+'s">'+q.slice(-1)+'</span>';
-    setTimeout(function () {
-      updateElement(q);
-    }, duration * 1000);
-  };  
-  updateElement(e.target.value);
-}
-
 export default function App() {
     const [hover,setHover] = useState(false)
+    const [to,setTo] = useState([])
     const url = (name, wrap = false) =>{
         if(wrap){
             return `url('https://awv3node-homepage.surge.sh/build/assets/${name}.svg')`
@@ -30,6 +19,23 @@ export default function App() {
         }
     }
     const parallax = useRef(IParallax)
+
+    const inputig = (e) =>{
+      var el = document.createElement('span');
+    document.body.appendChild(el);
+    var updateElement = function(q) {
+      var offset = Math.floor(Math.random() * 100);
+      var duration = Math.floor(Math.random() * 10);
+      var size = 15 + 10 - duration;
+      el.innerHTML = '<span class="flying-text" style="color: gray;right:'+offset+'vw; font-size: '+size+'px; animation-duration:'+duration+'s">'+q.slice(-1)+'</span>';
+      // setTo([...to,setInterval(function () {
+      //   updateElement(q);
+      // }, duration * 1000)])
+      
+    };  
+    updateElement(e.target.value);
+  }
+
     return (
       <div style={{ width: '100%', height: '100%', background: '#805E73', overflow: 'hidden' }}>
         <style>
@@ -71,7 +77,7 @@ export default function App() {
         <ParallaxLayer offset={0} speed={-1} style={{ backgroundColor: 'lightblue' }} />
           <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: 'black' }} />
           <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
-          <ParallaxLayer offset={3} speed={1} style={{ backgroundColor: 'lightgreen' }} />
+          <ParallaxLayer offset={3} speed={1} style={{ backgroundColor: '#87BCDE' }} />
           
   
           <ParallaxLayer
@@ -121,7 +127,7 @@ export default function App() {
           </ParallaxLayer>
   
           <ParallaxLayer
-            offset={2.5}
+            offset={3.2}
             speed={-0.4}
             style={{
               display: 'flex',
@@ -129,18 +135,11 @@ export default function App() {
               justifyContent: 'center',
               pointerEvents: 'none',
             }}>
-            <img src={url('earth')} style={{ width: '30%' }} />
+              <Image src={bgJakarta}/>
+
           </ParallaxLayer>
   
-          <ParallaxLayer
-            offset={2}
-            speed={-0.3}
-            style={{
-              backgroundSize: '80%',
-              backgroundPosition: 'center',
-              backgroundImage: url('clients', true),
-            }}
-          />
+          
   
           <ParallaxLayer
             offset={0}
@@ -153,7 +152,15 @@ export default function App() {
 
                 <input type="text" onChange={inputig} placeholder="Masukan nama ig" className="rounded-full outline-none text-slate-500 border-2 p-5"></input>
 
-                <button onClick={() => parallax.current.scrollTo(1)} className={styles['btn-cloud'] + ' mt-56 w-44'}>next</button>
+                <button onClick={() =>{ 
+                  parallax.current.scrollTo(1)
+                  document.querySelectorAll('.flying-text').forEach(el=>{
+                    el.remove()
+                  })
+                  
+                }
+                  
+              } className={styles['btn-cloud'] + ' mt-56 w-44'}>next</button>
                 
 
             {/* <img src={url('server')} style={{ width: '20%' }} /> */}
@@ -170,7 +177,7 @@ export default function App() {
             }}>
             <div></div>
             <div className="text-slate-300 text-center">
-            <h1 className="mb-5">Pilih avatar kamu</h1>
+            <h1 className="mb-5 text-3xl">PILIH AVATAR KAMU</h1>
 
             <div className="grid grid-cols-3 gap-8 p-5">
      
@@ -197,19 +204,75 @@ export default function App() {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            onClick={() => parallax.current.scrollTo(3)}>
-            <img src={url('clients-main')} style={{ width: '40%' }} />
+            // onClick={() => parallax.current.scrollTo(3)}
+            >
+              
+              
+              <div className="relative -z-10">
+              <Image src={pngJakarta} />
+              <div onClick={()=> parallax.current.scrollTo(3)} style={{cursor: 'pointer'}}>
+              <div style={{top: '30%', zIndex: '50'}} className={element['pin']}></div>
+                <div style={{top: '30%', zIndex: '20'}} className={element['pulse']}></div>
+              </div>
+
+              <div onClick={()=> parallax.current.scrollTo(3)} style={{cursor: 'pointer'}}>
+              <div style={{top: '60%',left: '37%',zIndex: '50'}} className={element['pin']}></div>
+                <div style={{top: '60%',left: '37%',zIndex: '20'}} className={element['pulse']}></div>
+              </div>
+
+              <div onClick={()=> parallax.current.scrollTo(3)} style={{cursor: 'pointer'}}>
+              <div style={{top: '20%', left: '20%',zIndex: '50'}} className={element['pin']}></div>
+                <div style={{top: '20%', left: '20%',zIndex: '20'}} className={element['pulse']}></div>
+              </div>
+
+              <div onClick={()=> parallax.current.scrollTo(3)} style={{cursor: 'pointer'}}>
+              <div style={{top: '17%', left: '68%',zIndex: '50'}} className={element['pin']}></div>
+                <div style={{top: '17%', left: '68%',zIndex: '20'}} className={element['pulse']}></div>
+              </div>
+
+              <div onClick={()=> parallax.current.scrollTo(3)} style={{cursor: 'pointer'}}>
+              <div style={{bottom: '14%', left: '68%',zIndex: '50'}} className={element['pin']}></div>
+                <div style={{bottom: '14%', left: '68%',zIndex: '20'}} className={element['pulse']}></div>
+              </div>
+
+
+              </div>
+
+              
+              
+            {/* <label className={inputselect['select']}>
+  <select className={inputselect['select-main']}>
+    <option value="1">Jakarta Selatan</option>
+    <option value="2">Jakarta Timur</option>
+    <option value="3">Jakarta Barat</option>
+  </select>
+</label> */}
           </ParallaxLayer>
           <ParallaxLayer
             offset={3}
             speed={0.1}
-            onClick={() => parallax.current.scrollTo(0)}
+            // onClick={() => parallax.current.scrollTo(0)}
             style={{
               display: 'flex',
+              flexFlow: 'column',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <img src={url('bash')} style={{ width: '40%' }} />
+              
+              {/* <input type="text" placeholder="1 Kalimat untuk JAKARTA!" className="rounded-full outline-none w-1/2 text-slate-500 border-2 p-5"></input> */}
+              {/* <img onMouseEnter={()=> setHover(!hover)} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkdPUrvq_PqcJ6xThm45NFBRnGYPElU28gAw&usqp=CAU" className={"w-20 mb-12 rounded-full " + styles['hover-avatar']}></img> */}
+<form className="md:w-1/2">   
+
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+
+        <input type="search" id="default-search" className={"block outline-none w-full py-6 md:py-12 px-8 text-sm text-gray-900 md:text-xl border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " + element['aspirasi']} placeholder="SATU KALIMAT UNTUK JAKARTA" required/>
+        <button className="w-full mt-5 p-5 bg-slate-500 hover:bg-slate-600 rounded-xl text-white text-md">Kirim</button>
+
+    </div>
+</form>
+
+
           </ParallaxLayer>
         </Parallax>
       </div>

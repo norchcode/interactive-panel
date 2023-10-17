@@ -12,8 +12,10 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  avatar  String
-  daerah String
-  aspirasi String
+  id Int @id @default(autoincrement())
+  daerah String @db.VarChar(30)
+  aspirasi String @db.VarChar(70)
+  username String @db.VarChar(30)
+  x Int
+  y Int
 }
