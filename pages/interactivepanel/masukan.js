@@ -48,7 +48,7 @@ export default function masukan(){
         delete error[state]
         setInput(prev =>({
             ...prev,
-            [state]: value
+            [state]: value.replace(/\n/g, '')
         }))
         console.log(input)
     }
@@ -88,7 +88,7 @@ export default function masukan(){
                 setWaitBtn(true)
                 setTimeout(()=>{
                     setWaitBtn(false)
-                },30000)
+                },70000)
             }) 
             
 
@@ -193,7 +193,11 @@ label{
                 <label>10 Kata untuk Jakarta</label>
                 <div className="relative">
                     <img src="/kotakaspirasi.png" className={"kotak-aspirasi"+(error.aspirasi ? ' error' : '')} style={{width: '300px',height: '100px'}}></img>
-                    <textarea value={input.aspirasi} defaultValue={input.aspirasi} onChange={(e) => changeInput(e.target.value,'aspirasi')} placeholder="Ketik Aspirasimu" className={"pl-5 lined thick input-sketch bigtext absolute top-3 left-5"} type="text"/>
+                    <textarea onKeyDown={e=>{
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                          }
+                    }} value={input.aspirasi} defaultValue={input.aspirasi} onChange={(e) => changeInput(e.target.value,'aspirasi')} placeholder="Ketik Aspirasimu" className={"pl-5 lined thick input-sketch bigtext absolute top-3 left-5"} type="text"/>
                 </div>
                 
 

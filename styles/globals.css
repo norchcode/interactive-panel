@@ -28,7 +28,9 @@
 .marquee_list{
   min-width: 10vw;
   max-width: 30vw;
-  line-height: 0.7;
+  /* line-height: 0.7; */
+  line-height: 1.4;
+
   margin-left: 10vh;
   /* background-color: rgb(226, 226, 226); */
   color: white;
@@ -47,6 +49,7 @@
 } 
 .marquee_list.animation{
     animation: scaleAnimation 5s;
+    
 }
 .rfm-initial-child-container{
   align-items: center !important;

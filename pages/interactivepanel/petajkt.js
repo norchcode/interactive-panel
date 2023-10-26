@@ -27,26 +27,26 @@ export default function petajkt(){
     })
 
     const [aspirasi,setAspirasi] = useState({
-      jakartabarat: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
-      jakartatimur: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
-      jakartautara: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
-      jakartapusat: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum',
-      jakartaselatan: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum'
+      jakartabarat: '',
+      jakartatimur: '',
+      jakartautara: '',
+      jakartapusat: '',
+      jakartaselatan: ''
     })
   
     let dinamis = {
       jakartabarat: ['museum-macan','museum-fata','pancoran-glodok','pecel-lele','starling'],
       jakartatimur: ['keongmas','kanal','buperta','kesakpa','velo'],
-      jakartaselatan: ['mbloc','mrt','pim','scbd','sudirman','patpancoran','pemudamembangun','semanggi'],
-      jakartapusat: ['katredal','gn','bni','jamdinding','monas','mrts','pasar','arjuna','istana','jiexpo','lapbanteng','patselamat','gbk','tanahabang','tugtani'],
+      jakartaselatan: ['mbloc','mrt','pim','scbd','sudirman','patpancoran','semanggi'],
+      jakartapusat: ['katredal','gn','bni','jamdinding','monas','mrts','pasar','arjuna','istana','jiexpo','lapbanteng','patselamat','gbk','tanahabang'],
       jakartautara: ['dufan','hutan-bakau','jis','museum-bahari','pelasunda']
     }
 
     let angkaRan = {
       jakartabarat: Math.floor(Math.random() * 5),
       jakartatimur: Math.floor(Math.random() * 5),
-      jakartaselatan: Math.floor(Math.random() * 8),
-      jakartapusat: Math.floor(Math.random() * 15),
+      jakartaselatan: Math.floor(Math.random() * 7),
+      jakartapusat: Math.floor(Math.random() * 14),
       jakartautara: Math.floor(Math.random() * 5)
     }
 
@@ -153,7 +153,7 @@ export default function petajkt(){
                       jenis: "0"
                     }))
                     }
-              },20000)
+              },60000)
           }, 5000);
           },5000)
           
@@ -205,7 +205,7 @@ export default function petajkt(){
       setZoom(null,output.daerah)
       setAspirasi((prev)=>({
         ...prev,
-        [output.daerah.replace(/-/g, '')]: output.aspirasi + ' -'+output.username
+        [output.daerah.replace(/-/g, '')]: output.aspirasi.replace(/\n/g, '') + ' -'+output.username
       }))
     }
 
@@ -332,7 +332,7 @@ export default function petajkt(){
       document.querySelector('.btn-kembali').classList.remove('hidden')
       setAspirasi((prev)=>({
         ...prev,
-        [user.daerah.replace(/-/g, '')]: user.aspirasi+ ' -'+user.username
+        [user.daerah.replace(/-/g, '')]: user.aspirasi.replace(/\n/g, '')+ ' -'+user.username
       }))
     }
 
@@ -350,8 +350,9 @@ export default function petajkt(){
             .tulisan-zoom{
               left: 10% !important;
               top: 40% !important;
+              font-weight: bold;
               bottom: 60% !important;
-              font-size: 280% !important;
+              font-size: 400% !important;
             }
             .ketengah{
               top: 0% !important;
@@ -387,12 +388,14 @@ export default function petajkt(){
             }
             .text-aspirasi{
               top: 58vh !important;
-              font-size: 200% !important;
-              right: -120% !important;
+              font-size: 300% !important;
+              right: -110% !important;
+              line-height: 100%;
             }
             .peta-prov{
               transition: all 1s;
               opacity: 0;
+              object-fit: cover;
             }
             .zoom-jakbar{
               opacity: 0
@@ -427,6 +430,12 @@ export default function petajkt(){
             }
             .mark:hover{
               animation: moveUpDown 2s linear infinite;
+            }
+            .logo-kkk{
+              position: absolute;
+              right: -30%;
+              bottom: 2%;
+              width: 20%;
             }
            
           @keyframes moveUpDown {
@@ -465,7 +474,7 @@ export default function petajkt(){
             user.jakartautara.map((el,i)=>{
               if(i % 2 == 0){
                 return(
-                  <img src="/mark.png" className={"absolute m-"+el.id+" mark m-"+dinamis.jakartautara[angkaRan.jakartautara]} onClick={()=> klikmarker('jakarta-utara',dinamis.jakartautara[angkaRan.jakartautara],'50%',el)} style={{width: '10%',top: 32 + ((45 - 32) * (el.x / 100))+'%',right:  -52 + ((-15 - -52) * (el.x / 100))+'%'}}></img>
+                  <img src="/mark.png" className={"absolute m-"+el.id+" mark m-"+dinamis.jakartautara[angkaRan.jakartautara]} onClick={()=> klikmarker('jakarta-utara',dinamis.jakartautara[angkaRan.jakartautara],'50%',el)} style={{width: '10%',top: 37 + ((50 - 37) * (el.x / 100))+'%',right:  -52 + ((-15 - -52) * (el.x / 100))+'%'}}></img>
                 )
               }else{
                 return(
@@ -501,7 +510,7 @@ export default function petajkt(){
           {
             user.jakartabarat.map((el,i)=>{
               return(
-                <img src="/mark.png" className={"absolute mark m-"+el.id+" m-"+dinamis.jakartabarat[angkaRan.jakartabarat]} onClick={()=> klikmarker('jakarta-barat',dinamis.jakartabarat[angkaRan.jakartabarat],'50%',el)} style={{width: '10%',top: (el.y * ((84 - 23) / 100)) + 23+'vh',right:  -32 + ((9 - -32) * (el.x / 100))+'%'}}></img>
+                <img src="/mark.png" className={"absolute mark m-"+el.id+" m-"+dinamis.jakartabarat[angkaRan.jakartabarat]} onClick={()=> klikmarker('jakarta-barat',dinamis.jakartabarat[angkaRan.jakartabarat],'50%',el)} style={{width: '10%',top: (el.y * ((81 - 29) / 100)) + 29+'vh',right:  -32 + ((9 - -32) * (el.x / 100))+'%'}}></img>
               )
             })
           }
@@ -538,7 +547,6 @@ export default function petajkt(){
           <img src="/scbd.png" className="gambar-attr scbd" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
           <img src="/sudirman.png" className="gambar-attr sudirman" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
           <img src="/patpancoran.png" className="gambar-attr patpancoran" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
-          <img src="/pemudamembangun.png" className="gambar-attr pemudamembangun" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
           <img src="/semanggi.png" className="gambar-attr semanggi" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
 
           <h1 className="text-aspirasi" onTransitionEnd={(e)=>animateText(e)} data-value={aspirasi.jakartaselatan}style={{width:'40%',fontSize: '200%',position: 'absolute',right: '-120%', bottom: '13%',transition: 'all 1s',opacity: '0'}}>{aspirasi.jakartaselatan}</h1>
@@ -569,7 +577,6 @@ export default function petajkt(){
           <img src="/patselamat.png" className="gambar-attr patselamat" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
           <img src="/gbk.png" className="gambar-attr gbk" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
           <img src="/tanahabang.png" className="gambar-attr tanahabang" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
-          <img src="/tugtani.png" className="gambar-attr tugtani" style={{width: '40%',top: '-15%',position: 'absolute',right: '-121%',opacity: 0,transition: 'all 1s'}}></img>
           
           <h1 className="text-aspirasi" onTransitionEnd={(e)=>animateText(e)} data-value={aspirasi.jakartapusat}style={{width:'40%',fontSize: '200%',position: 'absolute',right: '-120%', bottom: '13%',transition: 'all 1s',opacity: '0',top: '50%'}}>{aspirasi.jakartapusat}</h1>
 
@@ -605,7 +612,7 @@ export default function petajkt(){
               {
                 user.jakartautara.map(el=>{
                   return(
-                    <img src="/mark.png" className="absolute mark-utama" style={{width: '50%',top: -5 + ((40 - -5) * (el.y / 100))+'%',right: -5 + ((25 - -5) * (el.x / 100))+'%'}}></img>
+                    <img src="/mark.png" className="absolute mark-utama" style={{width: '50%',top: -5 + ((30 - -5) * (el.y / 100))+'%',right: 20 + ((55 - 20) * (el.x / 100))+'%'}}></img>
                   )
                 })
               }
@@ -623,26 +630,26 @@ export default function petajkt(){
               
             </div>
             
-           <img onClick={() => resetZoom()} src="/peta-new.png" className={'petafull'} style={{width: '95%',height: '95%'}} ></img>
-
+           <img onClick={() => resetZoom()} src="/peta-new.png" className={'petafull'} style={{width: '80%',height: '95%'}} ></img>
+            <img src="/logo-kkk.png" className="logo-kkk"></img>
            <div className="absolute bottom-0" style={{width: '20%',left: '24%',bottom: '25%'}}>
               <img onClick={(el)=> setZoom(el,'jakarta-selatan')} style={{zIndex: '10',position: 'relative'}} className="peta peta-jakarta-selatan" src="/jaksel.png"></img>
               {
                 user.jakartaselatan.map(el=>{
                   return(
-                    <img src="/mark.png" className="absolute mark-utama" style={{width: '50%',top: -35 + ((80 - -35) * (el.y / 100))+'%',right: -1 + ((75 - -1) * (el.x / 100))+'%'}}></img>
+                    <img src="/mark.png" className="absolute mark-utama" style={{width: '50%',top: -35 + ((70 - -35) * (el.y / 100))+'%',right: -1 + ((75 - -1) * (el.x / 100))+'%'}}></img>
                   )
                 })
               }
 
             </div>
 
-            <div className="absolute bottom-0" style={{width: '20%',right: '21%',bottom: '22%'}}>
+            <div className="absolute bottom-0" style={{width: '20%',right: '35%',bottom: '22%'}}>
               <img onClick={(el)=> setZoom(el,'jakarta-timur')} style={{zIndex: '10',position: 'relative'}} className="peta peta-jakarta-timur" src="/jatim.png"></img>
               {
                 user.jakartatimur.map(el=>{
                   return(
-                    <img src="/mark.png" className="absolute mark-utama" style={{width: '50%',top: -55 + ((140 - -55) * (el.y / 100))+'%',right: 20 + ((100 - 20) * (el.x / 100))+'%'}}></img>
+                    <img src="/mark.png" className="absolute mark-utama" style={{width: '50%',top: -20 + ((85 - -20) * (el.y / 100))+'%',right: -3 + ((100 - -3) * (el.x / 100))+'%'}}></img>
                   )
                 })
               }

@@ -34,20 +34,20 @@ export default function App({ Component, pageProps }) {
 
   if(isMobile){
     return (
-      <div className='flex justify-center align-center bg-white absolute w-full top-0 left-0 right-0 bottom-0'>
+      <div onContextMenu={handleContextMenu} className='flex justify-center align-center bg-white absolute w-full top-0 left-0 right-0 bottom-0'>
         <p className='text-3xl text-center mt-24'>Oops... hanya bisa diakses melalui PC!!!</p>
       </div>
     )
   }else{
     if(verify == '1'){
       return (
-        <main className={myFont.className}>
+        <main onContextMenu={handleContextMenu} className={myFont.className}>
           <Component {...pageProps} />
         </main>
       )
     }else{
       return (
-        <main className={myFont.className}>
+        <main onContextMenu={handleContextMenu} className={myFont.className}>
           <div className='bg-white absolute w-full top-0 left-0 right-0 bottom-0' style={{zIndex: 999}}>
           <div className='flex flex-col items-center justify-center'>
           <p className='text-3xl mt-24'>Password</p>
